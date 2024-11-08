@@ -1,0 +1,145 @@
+/* Background class for specific page */
+.background-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a, #333333); /* Darker gradient for more dramatic effect */
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Center the form container with padding */
+.form-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 50px;
+    background-color: rgba(30, 30, 30, 0.9); /* Darker background with more opacity */
+    border-radius: 20px; /* More pronounced rounded corners */
+    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.8); /* Stronger shadow for emphasis */
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    backdrop-filter: blur(12px); /* Enhanced glass effect */
+}
+
+/* Header styling */
+.claski1 {
+    text-align: center;
+    color: #ffcc00; /* Lighter yellow for better contrast */
+    margin-bottom: 20px;
+    font-size: 3rem; /* Larger font size for emphasis */
+    letter-spacing: 2px; /* Slightly tighter letter spacing */
+    text-transform: uppercase;
+    position: relative;
+    font-weight: 700; /* Bolder font weight */
+    font-family: 'Montserrat', sans-serif; /* Modern, clean font */
+}
+
+.claski1::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 5px;
+    background-color: #ffcc00;
+    margin: 15px auto 0;
+    border-radius: 5px;
+}
+
+/* Paragraph text styling */
+p {
+    text-align: center;
+    color: #d1d1d1; /* Light gray for better readability */
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+    font-family: 'Roboto', sans-serif; /* Clear, modern font */
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 30px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #ffcc00;
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.input-field {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid #444; /* Slightly darker borders */
+    border-radius: 10px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease-in-out;
+    background-color: #333; /* Darker input field background */
+    color: #fff; /* White text */
+}
+
+.input-field:focus {
+    border-color: #ffcc00;
+    background-color: #444; /* Lighter background on focus */
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.7); /* Stronger glow on focus */
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.button {
+    background: linear-gradient(to right, #ffcc00, #ff6600);
+    color: #fff;
+    border: none;
+    padding: 16px 40px;
+    font-size: 1.2rem;
+    border-radius: 10px; /* Softer rounded button */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 12px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+    font-family: 'Roboto', sans-serif;
+}
+
+.button:hover {
+    background: linear-gradient(to right, #ff6600, #ff3300);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Form container hover effect */
+.form-container:hover {
+    transform: translateY(-10px); /* Slight upward movement */
+    box-shadow: 0 15px 80px rgba(0, 0, 0, 0.8); /* More pronounced shadow */
+}
+
+/* Register link styling */
+.register-link {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.register-link a {
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+    color: #ff6600; /* Softer orange color on hover */
+}

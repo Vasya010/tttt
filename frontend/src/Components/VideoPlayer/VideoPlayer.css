@@ -1,0 +1,152 @@
+/* Base styles for video player */
+.video-player-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto;
+    overflow: hidden;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #000000, #0a0a0a);
+    padding: 25px;
+    box-shadow: 0px 0px 80px rgba(0, 255, 255, 0.8), 0px 0px 100px rgba(0, 255, 255, 0.4);
+    border: 3px solid rgba(0, 255, 255, 0.8);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Video styles */
+.video-player {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.85);
+}
+
+.video-player-container:hover .video-player {
+    transform: scale(1.06);
+    box-shadow: 0px 0px 50px rgba(0, 255, 255, 0.9), 0px 0px 80px rgba(0, 255, 255, 0.5);
+}
+
+/* Control styles */
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(10, 10, 10, 1));
+    border-radius: 50px;
+    padding: 18px 45px;
+    box-shadow: 0px 0px 50px rgba(0, 255, 255, 0.75), inset 0px 0px 30px rgba(0, 0, 0, 0.6);
+    transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+}
+
+.controls:hover {
+    background-color: rgba(0, 0, 0, 1);
+    transform: scale(1.15);
+    box-shadow: 0px 0px 60px rgba(0, 255, 255, 0.9), inset 0px 0px 40px rgba(0, 0, 0, 0.75);
+}
+
+/* Play button styles */
+.play-pause-btn {
+    position: relative;
+    background-color: #00ffff;
+    border: none;
+    color: #000;
+    font-size: 26px;
+    font-weight: bold;
+    padding: 22px 55px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out, transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+    box-shadow: 0px 15px 40px rgba(0, 255, 255, 0.75), inset 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+.play-pause-btn:hover {
+    background-color: #00e6e6;
+    transform: scale(1.25);
+    box-shadow: 0px 25px 50px rgba(0, 255, 255, 1), inset 0px 0px 20px rgba(0, 0, 0, 0.5);
+}
+
+.play-pause-btn:focus {
+    outline: none;
+}
+
+.play-pause-btn::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    width: calc(100% + 24px);
+    height: calc(100% + 24px);
+    border-radius: 50px;
+    background: rgba(0, 255, 255, 0.6);
+    z-index: -1;
+    filter: blur(25px);
+    transition: all 0.4s ease-in-out;
+}
+
+.play-pause-btn:hover::before {
+    filter: blur(30px);
+    transform: scale(1.4);
+}
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+    .video-player-container {
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    .controls {
+        padding: 10px 25px;
+        border-radius: 30px;
+        bottom: 15px;
+    }
+
+    .play-pause-btn {
+        font-size: 20px;
+        padding: 15px 35px;
+        border-radius: 30px;
+    }
+
+    .play-pause-btn:hover {
+        transform: scale(1.15);
+    }
+
+    .play-pause-btn::before {
+        top: -8px;
+        left: -8px;
+        width: calc(100% + 16px);
+        height: calc(100% + 16px);
+        filter: blur(15px);
+    }
+
+    /* Tweak hover effects for better performance on mobile */
+    .video-player-container:hover .video-player,
+    .controls:hover,
+    .play-pause-btn:hover {
+        box-shadow: 0px 0px 40px rgba(0, 255, 255, 0.6), 0px 0px 60px rgba(0, 255, 255, 0.4);
+    }
+}
+
+
+.quality-selector {
+    margin-left: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background: #00ffff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quality-selector:hover {
+    background-color: #00e6e6;
+}

@@ -1,0 +1,92 @@
+/* Trailer.css */
+
+.Trailerpage {
+    background-color: #0a0a0a; /* Глубокий черный фон */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    color: #e6e6e6;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.trailerHeader {
+    font-size: 2.8rem;
+    color: #ffd700; /* Золотистый цвет для заголовка */
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+    animation: fadeIn 1s ease-out;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 10px;
+}
+
+.trailerCard {
+    background-color: #1a1a1a;
+    border: 1px solid rgba(255, 215, 0, 0.3); /* Золотистая рамка */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255, 215, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #f0f0f0;
+    overflow: hidden;
+    position: relative;
+}
+
+.trailerCard:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+    z-index: 0;
+}
+
+.trailerCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.5), inset 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.trailerVideo {
+    width: 100%;
+    height: 450px;
+    background-color: black;
+    border-radius: 10px;
+    border: 1px solid #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.trailerTitle {
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.trailerDescription {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e6e6e6;
+}
+
+.trailerTitle:hover {
+    color: #ffae00;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}

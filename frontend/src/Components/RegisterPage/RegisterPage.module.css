@@ -1,0 +1,96 @@
+.container1 {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 50px;
+  background: radial-gradient(circle at top left, #0a0a12, #1e1e30); /* Темный градиент для sci-fi стиля */
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Мягкая тень */
+  text-align: center;
+  color: #e1e1e1;
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  color: #0ed6fd; /* Неоновый оттенок голубого */
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 5px 12px rgba(14, 214, 253, 0.6); /* Неоновый эффект */
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+  line-height: 1.7;
+  color: #b0b0b0; /* Более мягкий оттенок */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input {
+  padding: 15px;
+  font-size: 1.1rem;
+  border: 1px solid rgba(0, 198, 255, 0.3);
+  border-radius: 10px;
+  background-color: #292943;
+  color: #0ed6fd;
+  box-shadow: inset 0 2px 5px rgba(14, 214, 253, 0.25);
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  background-color: #3b3b5b;
+  box-shadow: 0 0 12px #0ed6fd, inset 0 3px 10px rgba(14, 214, 253, 0.4);
+  outline: none;
+}
+
+.input::placeholder {
+  color: #5c5c7a;
+}
+
+.button {
+  padding: 15px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(135deg, #0ed6fd, #0098ff);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #0098ff, #0ed6fd);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(14, 214, 253, 0.4);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 15px rgba(14, 214, 253, 0.25);
+}
+
+@media (max-width: 768px) {
+  .container1 {
+    padding: 30px;
+  }
+
+  .title {
+    font-size: 2.3rem;
+  }
+
+  .input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .button {
+    font-size: 1rem;
+  }
+}
