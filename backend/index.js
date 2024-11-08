@@ -27,6 +27,14 @@ const db = mysql.createConnection({
     connectTimeout: 10000, // увеличьте время ожидания для подключения
 });
 
+// Укажите, с каких доменов разрешены запросы
+const corsOptions = {
+    origin: 'https://cd26973.tw1.ru', // Замените на реальный URL фронтенда
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Если нужно передавать куки или авторизационные данные
+    optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 
 
