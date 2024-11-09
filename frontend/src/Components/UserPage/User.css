@@ -9,18 +9,19 @@
     background-repeat: no-repeat;
     margin: 0;
     overflow: hidden;
+    transition: background 0.5s ease-in-out; /* Smooth transition for background */
 }
 
 /* Center the form container with padding */
 .form-container {
     width: 100%;
-    max-width: 450px;
-    padding: 50px;
-    background-color: rgba(30, 30, 30, 0.9); /* Darker background with more opacity */
-    border-radius: 20px; /* More pronounced rounded corners */
-    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.8); /* Stronger shadow for emphasis */
-    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
-    backdrop-filter: blur(12px); /* Enhanced glass effect */
+    max-width: 500px; /* Slightly wider form */
+    padding: 60px;
+    background-color: rgba(30, 30, 30, 0.85); /* Darker background with more opacity */
+    border-radius: 25px; /* More rounded corners for modern feel */
+    box-shadow: 0 12px 80px rgba(0, 0, 0, 0.7); /* Stronger shadow for emphasis */
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, background-color 0.4s ease;
+    backdrop-filter: blur(15px); /* Enhanced glass effect */
 }
 
 /* Header styling */
@@ -28,21 +29,22 @@
     text-align: center;
     color: #ffcc00; /* Lighter yellow for better contrast */
     margin-bottom: 20px;
-    font-size: 3rem; /* Larger font size for emphasis */
-    letter-spacing: 2px; /* Slightly tighter letter spacing */
+    font-size: 3.5rem; /* Larger font size for emphasis */
+    letter-spacing: 3px; /* Slightly tighter letter spacing */
     text-transform: uppercase;
     position: relative;
-    font-weight: 700; /* Bolder font weight */
+    font-weight: 800; /* Bolder font weight */
     font-family: 'Montserrat', sans-serif; /* Modern, clean font */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Subtle shadow for better readability */
 }
 
 .claski1::after {
     content: '';
     display: block;
-    width: 100px;
-    height: 5px;
+    width: 120px; /* Wider underline */
+    height: 6px;
     background-color: #ffcc00;
-    margin: 15px auto 0;
+    margin: 20px auto 0;
     border-radius: 5px;
 }
 
@@ -50,22 +52,23 @@
 p {
     text-align: center;
     color: #d1d1d1; /* Light gray for better readability */
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 35px;
     font-family: 'Roboto', sans-serif; /* Clear, modern font */
+    line-height: 1.6; /* Improved line spacing */
 }
 
 /* Form styling */
 .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 35px; /* Increased margin for better spacing */
 }
 
 .label {
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-weight: bold;
     color: #ffcc00;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Slightly larger font */
     font-family: 'Roboto', sans-serif;
 }
 
@@ -73,18 +76,19 @@ p {
     width: 100%;
     padding: 18px;
     border: 2px solid #444; /* Slightly darker borders */
-    border-radius: 10px;
+    border-radius: 12px; /* Softer, rounder input corners */
     font-size: 1.2rem;
     transition: all 0.3s ease-in-out;
     background-color: #333; /* Darker input field background */
     color: #fff; /* White text */
+    box-sizing: border-box;
 }
 
 .input-field:focus {
     border-color: #ffcc00;
     background-color: #444; /* Lighter background on focus */
     outline: none;
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.7); /* Stronger glow on focus */
+    box-shadow: 0 0 18px rgba(255, 204, 0, 0.8); /* Stronger glow on focus */
 }
 
 /* Button Group */
@@ -98,31 +102,33 @@ p {
     background: linear-gradient(to right, #ffcc00, #ff6600);
     color: #fff;
     border: none;
-    padding: 16px 40px;
+    padding: 18px 45px;
     font-size: 1.2rem;
-    border-radius: 10px; /* Softer rounded button */
+    border-radius: 12px; /* Softer rounded button */
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 0 12px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5); /* Deeper shadow */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Deeper shadow */
     font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px; /* Slightly wider letter spacing */
 }
 
 .button:hover {
     background: linear-gradient(to right, #ff6600, #ff3300);
     transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
 }
 
 .button:active {
     transform: translateY(0);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 /* Form container hover effect */
 .form-container:hover {
-    transform: translateY(-10px); /* Slight upward movement */
-    box-shadow: 0 15px 80px rgba(0, 0, 0, 0.8); /* More pronounced shadow */
+    transform: translateY(-12px); /* Slight upward movement */
+    box-shadow: 0 18px 90px rgba(0, 0, 0, 0.8); /* More pronounced shadow */
+    background-color: rgba(30, 30, 30, 0.9); /* Subtle background shift */
 }
 
 /* Register link styling */
@@ -136,10 +142,11 @@ p {
     text-decoration: none;
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: color 0.3s ease;
 }
 
 .register-link a:hover {
     color: #ff6600; /* Softer orange color on hover */
+    text-decoration: underline; /* Underline on hover for better interactivity */
 }

@@ -3,15 +3,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
-    background: linear-gradient(135deg, #000 0%, #1c1c1c 100%); /* Градиент для фона */
+    padding: 60px;
+    background: linear-gradient(135deg, #0c0c0c 0%, #2f2f2f 100%); /* Углубленный градиент */
     color: #fff; /* Белый текст */
-    min-height: 100%;
+    min-height: 100vh;
     max-width: 100%;
     margin: 0 auto;
     opacity: 0;
-    animation: fadeIn 1.2s ease-in-out forwards;
-    font-family: 'Arial', sans-serif;
+    animation: fadeIn 1.5s ease-out forwards;
+    font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
 }
 
@@ -22,16 +22,22 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    padding: 15px 0;
-    background: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); /* Более выразительная тень */
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.9); /* Темный полупрозрачный фон */
+    box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.7); /* Мощная тень */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Анимация плавного появления */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -42,53 +48,60 @@ header {
 /* Стилизация изображения игры */
 .game-image {
     width: 100%;
-    max-width: 450px;
-    margin-bottom: 40px;
-    border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3); /* Более глубокая тень */
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    max-width: 500px;
+    margin-bottom: 50px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(255, 255, 255, 0.4); /* Более глубокая тень */
+    transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
 }
 
 .game-image:hover {
-    transform: scale(1.15); /* Увеличение при наведении */
-    box-shadow: 0 14px 40px rgba(255, 255, 255, 0.4); /* Более яркая тень */
+    transform: scale(1.15);
+    box-shadow: 0 25px 60px rgba(255, 255, 255, 0.5);
+    filter: brightness(1.2); /* Яркость при наведении */
 }
 
 /* Стилизация информационного блока */
 .game-info {
     text-align: center;
-    max-width: 850px;
-    margin-bottom: 40px;
+    max-width: 900px;
+    margin-bottom: 50px;
 }
 
 .game-info h1 {
-    font-size: 3.5rem;
-    background: linear-gradient(45deg, #1f8ef1, #00d4ff); /* Градиент для заголовка */
+    font-size: 4rem;
+    background: linear-gradient(45deg, #ff6a00, #ee0979); /* Яркий градиент */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 25px;
-    font-weight: bold;
+    margin-bottom: 30px;
+    font-weight: bolder;
     text-transform: uppercase;
-    letter-spacing: 3px;
-    transition: transform 0.4s ease;
+    letter-spacing: 5px;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .game-info h1:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #ff2a68, #f0e0e6); /* Меняется градиент при наведении */
 }
 
 .game-info p {
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-    line-height: 1.8;
-    color: #f0f0f0; /* Легкий серый цвет для текста */
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    line-height: 1.9;
+    color: #e1e1e1; /* Светлый цвет текста */
+    transition: color 0.3s ease;
+}
+
+.game-info p:hover {
+    color: #ff6a00; /* Цвет текста меняется на акцентный */
 }
 
 /* Стилизация цены игры */
 .game-price {
-    font-size: 2rem;
-    color: #e74c3c; /* Яркий акцент для цены */
-    margin-bottom: 25px;
+    font-size: 2.2rem;
+    color: #e74c3c;
+    margin-bottom: 30px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -96,62 +109,70 @@ header {
 
 /* Стилизация кнопки покупки */
 .buy-now-button {
-    padding: 18px 40px;
+    padding: 20px 50px;
     background: linear-gradient(45deg, #1f8ef1, #00d4ff);
     color: white;
     border: none;
-    border-radius: 35px;
-    font-size: 1.5rem;
+    border-radius: 45px;
+    font-size: 1.8rem;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(31, 142, 241, 0.6); /* Объемная тень */
-    transition: background 0.4s ease, transform 0.4s ease;
+    box-shadow: 0 15px 40px rgba(31, 142, 241, 0.6);
+    transition: background 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease;
 }
 
 .buy-now-button:hover {
-    background: linear-gradient(45deg, #0d47a1, #1f8ef1); /* Изменение градиента при наведении */
-    transform: scale(1.12); /* Увеличение кнопки */
+    background: linear-gradient(45deg, #0d47a1, #1f8ef1);
+    transform: scale(1.1);
+    box-shadow: 0 20px 50px rgba(0, 92, 187, 0.7);
 }
 
 /* Стилизация сообщения */
 .message {
-    font-size: 1.4rem;
-    color: #ffcc00; /* Яркий желтый для сообщений */
-    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: #ffcc00;
+    margin-bottom: 30px;
+    font-weight: bold;
 }
 
 /* Стилизация трейлера */
 .game-trailer {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 60px;
+    margin-bottom: 60px;
     text-align: center;
     width: 100%;
 }
 
 .game-trailer h2 {
-    font-size: 2.4rem;
+    font-size: 2.6rem;
     background: linear-gradient(45deg, #1f8ef1, #00d4ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .trailer-video {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
     height: auto;
-    border-radius: 25px;
-    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.3); /* Объемная тень для видео */
+    border-radius: 30px;
+    box-shadow: 0 25px 80px rgba(255, 255, 255, 0.5);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.trailer-video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 30px 100px rgba(255, 255, 255, 0.6);
 }
 
 /* Секция скриншотов */
 .game-screenshots {
-    margin-top: 50px;
+    margin-top: 60px;
     text-align: center;
 }
 
 .game-screenshots h2 {
-    font-size: 2.2rem;
-    margin-bottom: 25px;
+    font-size: 2.6rem;
+    margin-bottom: 30px;
     background: linear-gradient(45deg, #1f8ef1, #00d4ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -159,50 +180,50 @@ header {
 
 .screenshots-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    max-width: 1000px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .screenshot {
     width: 100%;
     height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25); /* Глубокая тень */
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.35);
     transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .screenshot:hover {
-    transform: scale(1.12); /* Увеличение скриншотов */
-    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 20px 50px rgba(255, 255, 255, 0.45);
 }
 
 /* Стилизация заголовка игры */
 .game-title {
-    font-size: 3.5rem;
-    color: #1f8ef1;
-    margin-bottom: 30px;
+    font-size: 4rem;
+    color: #ff6a00;
+    margin-bottom: 35px;
     text-align: center;
-    font-weight: bold;
+    font-weight: bolder;
     text-transform: uppercase;
     letter-spacing: 3px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .game-title:hover {
-    color: #0d47a1;
-    transform: scale(1.1); /* Увеличение при наведении */
+    color: #ee0979;
+    transform: scale(1.08);
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .game-info h1 {
-        font-size: 2.8rem;
+        font-size: 3.2rem;
     }
 
     .game-info p {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .trailer-video {
@@ -210,15 +231,15 @@ header {
     }
 
     .game-image {
-        max-width: 320px;
+        max-width: 350px;
     }
 
     .buy-now-button {
-        font-size: 1.3rem;
-        padding: 14px 32px;
+        font-size: 1.4rem;
+        padding: 16px 38px;
     }
 
     .game-title {
-        font-size: 2.8rem;
+        font-size: 3.2rem;
     }
 }

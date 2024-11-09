@@ -11,6 +11,7 @@ import News from './Components/news/News';
 import Trailer from './Components/Trailerpage/Trailer';
 import Support from './support/Support';
 
+// Lazy load components
 const Cover = lazy(() => import('./Components/Cover/Cover'));
 const VideoPlayer = lazy(() => import('./Components/VideoPlayer/VideoPlayer'));
 const CardContainer = lazy(() => import('./Components/CardContainer/CardContainer'));
@@ -27,11 +28,13 @@ export default class App extends Component {
     userId: localStorage.getItem('user_id') || null,
   };
 
+  // Handle user login
   handleLogin = (userId) => {
     localStorage.setItem('user_id', userId);
     this.setState({ userId });
   };
 
+  // Handle user logout
   handleLogout = () => {
     localStorage.removeItem('user_id');
     this.setState({ userId: null });
