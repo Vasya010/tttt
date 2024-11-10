@@ -56,12 +56,25 @@ export default class Adminpage extends Component {
   apiCall = async (url, options = {}) => {
     try {
       this.setState({ isLoading: true });
+      
       const response = await fetch(url, options);
+      
       if (!response.ok) {
-        const errorResponse = await response.json();
-        throw new Error(errorResponse.message || response.statusText);
+        let errorMessage = response.statusText;
+        
+        try {
+          const errorResponse = await response.json();
+          errorMessage = errorResponse.message || errorMessage;
+        } catch (jsonError) {
+          console.warn("Ответ не содержит JSON:", jsonError);
+        }
+        
+        throw new Error(errorMessage);
       }
-      return await response.json();
+
+      const data = await response.json();
+      return data;
+      
     } catch (error) {
       this.setState({ notification: error.message });
       console.error(`Ошибка при обращении к API: ${error.message}`);
@@ -69,6 +82,7 @@ export default class Adminpage extends Component {
       this.setState({ isLoading: false });
     }
   };
+
 
   fetchUsers = async () => {
     const users = await this.apiCall('http://localhost:5000/api/users');
@@ -108,7 +122,7 @@ export default class Adminpage extends Component {
 
   sendEmailNotifications = async (message) => {
     const token = localStorage.getItem('token');
-    const isAdmin = localStorage.getItem('isAdmin') === 'true'; // Check if user is admin
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
   
     if (!isAdmin) {
       this.setState({ notification: 'У вас нет прав администратора для выполнения этого запроса.' });
@@ -125,15 +139,14 @@ export default class Adminpage extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Send the token in the header
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           message: message,
           subject: 'Test Subject',
         }),
       });
-      console.log('Token:', token);
-      console.log('isAdmin:', isAdmin);
+      
       if (response.ok) {
         this.setState({ notification: 'Уведомление отправлено всем пользователям.' });
       } else {
@@ -144,8 +157,6 @@ export default class Adminpage extends Component {
       this.setState({ notification: `Ошибка при отправке уведомления: ${error.message}` });
     }
   };
-  
-  
   
   addGame = async () => {
     const { title, description, price } = this.state.newGame;
@@ -186,6 +197,26 @@ export default class Adminpage extends Component {
     }
   };
 
+  uploadLauncher = async () => {
+    const launcherFile = this.fileInput.current.files[0];
+  
+    if (!launcherFile) {
+      this.setState({ notification: 'Пожалуйста, выберите файл для загрузки.' });
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('launcherFile', launcherFile);
+  
+    const response = await this.apiCall('http://localhost:5000/api/upload-launcher', {
+      method: 'POST',
+      body: formData,
+    });
+  
+    if (response) {
+      this.setState({ notification: 'Лаунчер успешно загружен.' });
+    }
+  };
   deleteUser(userId) {
     fetch(`http://localhost:5000/api/users/${userId}`, {
         method: 'DELETE',
@@ -194,7 +225,6 @@ export default class Adminpage extends Component {
     .then(data => {
         if (data.message === 'Пользователь успешно удален.') {
             alert('Пользователь был удален');
-            // Можно обновить список пользователей после удаления
         } else {
             alert('Ошибка: ' + data.message);
         }
@@ -222,7 +252,7 @@ export default class Adminpage extends Component {
       <div className="admin-page">
        
         <nav className="admin-navbar">
-        <h1>Добро пожаловать, {this.state.adminUsername}</h1>
+          <h1>Добро пожаловать, {this.state.adminUsername}</h1>
           <ul>
             <li>Пользователи</li>
             <li>Игры</li>
@@ -244,94 +274,86 @@ export default class Adminpage extends Component {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(users) && users.length > 0 ? (
-                users.map((user) => (
-                  <tr key={user.user_id}>
-                    <td>{user.user_id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>
-                      <button onClick={() => this.deleteUser(user.user_id)}>Удалить</button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="4">Нет данных</td>
-                </tr>
-              )}
-            </tbody>
+  {Array.isArray(users) && users.length > 0 ? (
+    users.map((user) => (
+      <tr key={user.user_id}>
+        <td>{user.user_id}</td><td>{user.username}</td><td>{user.email}</td>
+        <td><button onClick={() => this.deleteUser(user.user_id)}>Удалить</button></td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="4">Нет данных</td>
+    </tr>
+  )}
+</tbody>
+
+
           </table>
 
           <h2>Управление играми</h2>
           <div className="add-game-form">
             <input type="text" name="title" value={newGame.title} onChange={this.handleChange} placeholder="Название игры" />
             <input type="text" name="description" value={newGame.description} onChange={this.handleChange} placeholder="Описание игры" />
-            <input type="number" name="price" value={newGame.price} onChange={this.handleChange} placeholder="Цена игры" />
-            <input type="file" ref={this.imageInput} onChange={this.handleFileChange} accept="image/*" />
-            <input type="file" ref={this.fileInput} onChange={this.handleFileChange} accept=".exe,.zip" />
-            <input type="file" ref={this.trailerInput} onChange={this.handleFileChange} accept="video/*" />
-            <input type="file" ref={this.screenshotsInput} onChange={this.handleScreenshotsChange} accept="image/*" multiple />
+            <input type="number" name="price" value={newGame.price} onChange={this.handleChange} placeholder="Цена" />
+            <input type="file" ref={this.imageInput} onChange={(e) => this.handleFileChange(e, 'image')} />
+            <input type="file" ref={this.fileInput} onChange={(e) => this.handleFileChange(e, 'game')} />
+            <input type="file" ref={this.trailerInput} onChange={(e) => this.handleFileChange(e, 'trailer')} />
+            <input type="file" multiple ref={this.screenshotsInput} onChange={this.handleScreenshotsChange} />
             <button onClick={this.addGame}>Добавить игру</button>
           </div>
+
+
+
+          <h2>Загрузка лаунчера</h2>
+<div className="add-game-form">
+  <input type="file" ref={this.fileInput} onChange={(e) => this.handleFileChange(e, 'launcher')} />
+  <button onClick={this.uploadLauncher}>Загрузить лаунчер</button>
+  <button onClick={this.downloadLauncher}>Скачать лаунчер</button>
+</div>
 
           <table className="game-table">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Название</th>
-                <th>Описание</th>
                 <th>Цена</th>
+                <th>Описание</th>
                 <th>Действия</th>
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(games) && games.length > 0 ? (
-                games.map((game) => (
-                  <tr key={game.id}>
-                    <td>{game.id}</td>
-                    <td>{game.title}</td>
-                    <td>{game.description}</td>
-                    <td>{game.price}</td>
-                    <td>
-                      <button onClick={() => this.deleteGame(game.id)}>Удалить</button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="5">Нет данных</td>
+              {games.map((game) => (
+                <tr key={game.id}> {/* Уникальный ключ для каждого элемента */}
+                  <td>{game.id}</td>
+                  <td>{game.title}</td>
+                  <td>{game.price}</td>
+                  <td>{game.description}</td>
+                  <td>
+                    <button onClick={() => this.deleteGame(game.id)}>Удалить</button>
+                  </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
 
           <h2>Купленные игры</h2>
-<table className="purchased-games-table">
-  <thead>
-    <tr>
-      <th>ID игры</th>
-      <th>ID пользователя</th>
-      <th>Название игры</th> {/* Add column for game name */}
-    </tr>
-  </thead>
-  <tbody>
-    {Array.isArray(purchasedGames) && purchasedGames.length > 0 ? (
-      purchasedGames.map((purchase) => (
-        <tr key={purchase.game_id}>
-        <td>{purchase.game_id}</td>
-        <td>{purchase.user_id}</td>
-        <td>{purchase.game_name}</td> {/* Отображаем название игры */}
-      </tr>
-      ))
-    ) : (
-      <tr>
-        <td colSpan="3">Нет данных</td> {/* Adjust colspan to 3 to cover all columns */}
-      </tr>
-    )}
-  </tbody>
-</table>
-
+          <table className="purchased-game-table">
+            <thead>
+              <tr>
+                <th>Имя пользователя</th>
+                <th>Название игры</th>
+              </tr>
+            </thead>
+            <tbody>
+              {purchasedGames.map((purchasedGame) => (
+                <tr key={`${purchasedGame.username}-${purchasedGame.game_title}`}> {/* Уникальный ключ для каждого элемента */}
+                  <td>{purchasedGame.username}</td>
+                  <td>{purchasedGame.game_title}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FaDownload } from 'react-icons/fa';
 import './Laucherpages.css';
+import Header from '../Header/Header';
 
 export default class Laucherpages extends Component {
   constructor(props) {
@@ -31,6 +32,45 @@ export default class Laucherpages extends Component {
   componentWillUnmount() {
     clearInterval(this.interval); // Clear interval on component unmount
   }
+
+  // Download launcher through backend API
+  downloadLauncher = async () => {
+    try {
+      // Делаем запрос на сервер для получения лаунчера
+      const response = await fetch('http://localhost:5000/api/download-launcher');
+      
+      // Проверяем, что ответ успешный
+      if (!response.ok) {
+        throw new Error(`Failed to download launcher: ${response.status} ${response.statusText}`);
+      }
+  
+      // Проверяем, что ответ - это файл (Blob)
+      const contentDisposition = response.headers.get('Content-Disposition');
+      const fileName = contentDisposition ? contentDisposition.split('filename=')[1] : 'VorlodGamesLauncher.rar';
+      
+      // Получаем файл в виде Blob
+      const blob = await response.blob();
+      
+      // Создаем URL для Blob
+      const url = window.URL.createObjectURL(blob);
+      
+      // Создаем элемент <a> для скачивания файла
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName); // Указываем имя файла
+      document.body.appendChild(link);
+      link.click();
+      
+      // Удаляем ссылку после скачивания
+      link.remove();
+      window.URL.revokeObjectURL(url); // Освобождаем URL
+    } catch (error) {
+      console.error('Error downloading the launcher:', error.message);
+    }
+  };
+  
+  
+  
 
   checkSystemRequirements = () => {
     const os = this.getOS();
@@ -67,7 +107,6 @@ export default class Laucherpages extends Component {
       warningMessage += 'Your screen resolution suggests that your device may not meet the minimum graphics requirements. ';
     }
 
-    // Display system specifications (add this functionality)
     warningMessage += `\n\nYour System Specs: 
     - OS: ${os}
     - RAM: ${memory} GB
@@ -79,7 +118,6 @@ export default class Laucherpages extends Component {
 
   getProcessorType = () => {
     const userAgent = navigator.userAgent;
-    // Checking for older processors (Pentium, Athlon, etc.)
     if (
       (userAgent.includes('Intel') && userAgent.includes('Pentium')) ||
       (userAgent.includes('AMD') && userAgent.includes('Athlon'))
@@ -95,7 +133,6 @@ export default class Laucherpages extends Component {
       const data = await response.json();
       const latestVersion = data.latestVersion;
 
-      // Assuming you have a way to get the current launcher version
       const currentVersion = '1.0.0'; // Replace with actual launcher version
 
       if (latestVersion !== currentVersion) {
@@ -138,56 +175,57 @@ export default class Laucherpages extends Component {
     const { countdown, systemCompatible, warningMessage, updateAvailable, updateMessage, ageVerified, showAgeModal } = this.state;
 
     return (
-      <div className="launcher-page">
-        <div className="launcher-container">
-          <h1 className="launcher-title">Download VorlodGames Launcher</h1>
-          <p className="launcher-description animated-text">
-            Get ready to dive into an incredible gaming experience. Download the VorlodGames launcher now!
-          </p>
+      <>
+        <Header/>
+        <div className="launcher-page">
+          <div className="launcher-container">
+            <h1 className="launcher-title">Download VorlodGames Launcher</h1>
+            <p className="launcher-description animated-text">
+              Get ready to dive into an incredible gaming experience. Download the VorlodGames launcher now!
+            </p>
 
-          {/* Update available */}
-          {updateAvailable && <p className="update-message">{updateMessage}</p>}
+            <p className="beta-version-message">The beta version of the launcher (1.0.0) is now available for download!</p>
 
-          {/* System compatibility check */}
-          {systemCompatible ? (
-            countdown > 0 ? (
-              <p className="countdown-timer">Launcher will be available in {countdown} seconds</p>
+            {updateAvailable && <p className="update-message">{updateMessage}</p>}
+
+            {systemCompatible ? (
+              countdown > 0 ? (
+                <p className="countdown-timer">Launcher will be available in {countdown} seconds</p>
+              ) : (
+                ageVerified ? (
+                  <button onClick={this.downloadLauncher} className="launcher-download-btn">
+                    <FaDownload className="me-2" />
+                    Download Launcher
+                  </button>
+                ) : null
+              )
             ) : (
-              ageVerified ? (
-                <a href="/path-to-launcher.exe" className="launcher-download-btn">
-                  <FaDownload className="me-2" />
-                  Скачать лаунчер
-                </a>
-              ) : null
-            )
-          ) : (
-            <p className="warning-message">{warningMessage}</p>
-          )}
+              <p className="warning-message">{warningMessage}</p>
+            )}
 
-          {/* Launcher requirements */}
-          <div className="launcher-requirements">
-            <h2>Launcher Requirements:</h2>
-            <ul>
-              <li>OS: Windows 10/11 (64-bit)</li>
-              <li>Processor: Intel Core i5 or better</li>
-              <li>Memory: 4 GB RAM</li>
-              <li>Storage: 500 MB available space</li>
-              <li>Graphics: Intel HD Graphics 4000 or better</li>
-            </ul>
-          </div>
-
-          {/* Age verification modal */}
-          {showAgeModal && (
-            <div className="age-modal">
-              <div className="age-modal-content">
-                <h2>Are you 15 or older?</h2>
-                <button onClick={() => this.handleAgeVerification(true)}>Yes</button>
-                <button onClick={() => this.handleAgeVerification(false)}>No</button>
-              </div>
+            <div className="launcher-requirements">
+              <h2>Launcher Requirements:</h2>
+              <ul>
+                <li>OS: Windows 10/11 (64-bit)</li>
+                <li>Processor: Intel Core i5 or better</li>
+                <li>Memory: 4 GB RAM</li>
+                <li>Storage: 500 MB available space</li>
+                <li>Graphics: Intel HD Graphics 4000 or better</li>
+              </ul>
             </div>
-          )}
+
+            {showAgeModal && (
+              <div className="age-modal">
+                <div className="age-modal-content">
+                  <h2>Are you 15 or older?</h2>
+                  <button onClick={() => this.handleAgeVerification(true)}>Yes</button>
+                  <button onClick={() => this.handleAgeVerification(false)}>No</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

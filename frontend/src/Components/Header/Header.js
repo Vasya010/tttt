@@ -133,11 +133,11 @@ function Header() {
               <>
                 <Nav.Link href="/user">
                   <FaUser className="me-1" />
-                  Войти
+                  {t('login')} 
                 </Nav.Link>
                 <Nav.Link href="/register">
                   <FaUser className="me-1" />
-                  Зарегистрироваться
+                  {t('register')} 
                 </Nav.Link>
               </>
             )}
